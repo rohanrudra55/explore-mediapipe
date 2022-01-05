@@ -1,6 +1,5 @@
 import cv2 as cv
 import mediapipe as mp
-import numpy as np
 
 class Facedetector:
     def __init__(self,model_selection=0,min_detection_confidence=0.5):
@@ -10,12 +9,23 @@ class Facedetector:
         self.minDetCon=min_detection_confidence
 
     def detect(self,inputImg):
+        """
+        Input:
+            Image containing face / faces
+
+        Returns:
+            Image with bounding box around  detected face
+            with six spots right eye, left eye, nose tip, 
+            mouth center, right ear tragion, and left ear 
+            tragion
+        """
         with self.faceDetection.FaceDetection(model_selection=self.modSel, min_detection_confidence=self.minDetCon) as facedetect:
             cpImg=inputImg.copy()
             self.image=cv.cvtColor(inputImg, cv.COLOR_BGR2RGB)
             results = facedetect.process(self.image)
             if results.detections:
                 for detection in results.detections:
+                    # print('Nose tip:',self.faceDetection.get_key_point(detection, self.faceDetection.FaceKeyPoint.NOSE_TIP))
                     self.drawing.draw_detection(cpImg, detection)
             return cpImg
     

@@ -62,6 +62,7 @@ class Facemesh:
             return cpImg
 
 # For webcam input:
+# Test
 if __name__ == "__main__":
     detector=Facemesh()
     cap = cv2.VideoCapture(0)

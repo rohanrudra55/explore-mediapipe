@@ -36,6 +36,7 @@ class Facedetector:
             print('Number of faces:',self.count)
         
 # For webcam input:
+# Test
 if __name__ == "__main__":
     detector=Facedetector()
     cap = cv.VideoCapture(0)
